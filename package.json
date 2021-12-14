@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "15.13.0",
+    "npm": "6.14.8"
+  },
   "scripts": {
     "start": "node backend/index.js"
   },
