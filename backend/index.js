@@ -10,7 +10,7 @@ app.use(express.json())
 
 // API
 const getNews = async currency => {
-  const browser = await chromium.launch({chromiumSandbox: false})
+  const browser = await chromium.launch()
   const page = await browser.newPage()
   await page.goto(`https://news.google.com/search?q=${currency}%20when%3A1d/`, {
     waitUntil: 'networkidle'
@@ -58,7 +58,7 @@ app.get('/:currency', async (req, res) => {
   res.json(articles)
 })
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
   res.json({Home: 'Página de Noticias'})
 })
 
