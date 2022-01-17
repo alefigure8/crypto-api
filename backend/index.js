@@ -49,7 +49,7 @@ const getNews = async currency => {
   }
 
   await browser.close()
-  return newsBody
+  return newsBody 
 }
 
 // ROUTE
