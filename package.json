@@ -7,6 +7,9 @@
     "node": "15.13.0",
     "npm": "6.14.8"
   },
+  "env":  {
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": 1
+  },
   "scripts": {
     "start": "node backend/index.js",
     "dev": "nodemon backend/index.js"
@@ -19,7 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^2.0.15",
-    "playwright-chromium": "^1.17.2",
+    "playwright-chromium": "1.11.1",
     "standard": "^16.0.4"
   },
   "devDependencies": {
