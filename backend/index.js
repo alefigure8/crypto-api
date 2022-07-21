@@ -13,8 +13,9 @@ const getNews = async currency => {
   const browser = await chromium.launch({chromiumSandbox: false})
   const context = await browser.newContext()
   const page = await context.newPage()
+  const waitUntil = req.query.waitUntil || "load"
   await page.goto(`https://news.google.com/search?q=${currency}%20when%3A1d/`, {
-    waitUntil: 'networkidle'
+    waitUntil
   })
   // await page.waitForSelector('img.tvs3Id', {
   //   waitFor: 'visible'
@@ -52,9 +53,13 @@ const getNews = async currency => {
 
 // ROUTE
 app.get('/:currency', async (req, res) => {
-  const currency = req.params.currency
-  const articles = await getNews(currency)
-  res.json(articles)
+  try {
+    const currency = req.params.currency
+    const articles = await getNews(currency)
+    res.json(articles)
+  } catch (error) {
+    res.status(500).json({error})
+  }
 })
 
 app.get('/', (req, res) => {
@@ -63,6 +68,6 @@ app.get('/', (req, res) => {
 
 const server = app.listen(PORT)
 
-server.once('error', err => {
-  console.log(err)
+server.on('error', err => {
+  console.log('Error en el servidor: ', err)
 })
