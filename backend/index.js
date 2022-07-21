@@ -61,4 +61,8 @@ app.get('/', (req, res) => {
   res.json({Home: 'Crypto News', Developed: `@alegomeznieto`})
 })
 
-app.listen(PORT)
+const server = app.listen(PORT)
+
+server.once('error', err => {
+  console.log(err)
+})
