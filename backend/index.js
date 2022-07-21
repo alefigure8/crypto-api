@@ -58,7 +58,7 @@ app.get('/:currency', async (req, res) => {
     const articles = await getNews(currency)
     res.json(articles)
   } catch (error) {
-    res.status(500).json({error})
+    res.status(500).json({error: error.message})
   }
 })
 
