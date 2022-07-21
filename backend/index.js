@@ -16,9 +16,9 @@ const getNews = async currency => {
   await page.goto(`https://news.google.com/search?q=${currency}%20when%3A1d/`, {
     waitUntil: 'networkidle'
   })
-  await page.waitForSelector('img.tvs3Id', {
-    waitFor: 'visible'
-  })
+  // await page.waitForSelector('img.tvs3Id', {
+  //   waitFor: 'visible'
+  // })
 
   const img = await page.$$eval('img.tvs3Id ', elements =>
     elements.map(el => el.src).slice(0, 5)
@@ -29,17 +29,15 @@ const getNews = async currency => {
       .map(el => {
         const title = el.querySelector('div.xrnccd h3.ipQwMb')
         const link = el.querySelector('a').getAttribute('href')
-        // const img = el.querySelector('img.tvs3Id') TODO
+        // const img = el.querySelector('img.tvs3Id')
         return {
           title: title.textContent,
           link: `https://news.google.com/${link}`
-          // img: img TODO
+          // img: img
         }
       })
       .slice(0, 5)
   })
-
-  // TODO FIx img, into the object
 
   for (let i = 0; i < newsBody.length; i++) {
     newsBody[i] = {
@@ -60,7 +58,7 @@ app.get('/:currency', async (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.json({Home: 'Página de Noticias'})
+  res.json({Home: 'Crypto News', Developed: `@alegomeznieto`})
 })
 
 app.listen(PORT)
